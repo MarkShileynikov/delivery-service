@@ -15,4 +15,7 @@ interface UserDao {
 
     @Query("SELECT COUNT(*) FROM users WHERE login = :login")
     fun checkIfUserExists(login: String) : Boolean
+
+    @Query("SELECT id FROM users WHERE login = :login")
+    fun getUserId(login: String) : Int
 }

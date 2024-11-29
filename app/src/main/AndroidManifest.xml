@@ -14,7 +14,7 @@
         android:theme="@style/Theme.DeliveryService"
         tools:targetApi="31">
 
-        <activity android:name=".SignInActivity"
+        <activity android:name=".ui.auth.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -22,13 +22,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SignUpActivity"
+        <activity android:name=".ui.auth.SignUpActivity"
             android:exported="true"/>
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".ui.MainActivity"
             android:exported="true"/>
 
-        <activity android:name=".RestaurantDetailActivity"
+        <activity android:name=".ui.restaurant.RestaurantDetailActivity"
+            android:exported="true"/>
+
+        <activity android:name=".ui.order.OrderActivity"
             android:exported="true"/>
 
     </application>

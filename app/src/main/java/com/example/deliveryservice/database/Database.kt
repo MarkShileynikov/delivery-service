@@ -4,15 +4,18 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.deliveryservice.App
+import com.example.deliveryservice.database.dao.OrderDao
 import com.example.deliveryservice.database.dao.RestaurantDao
 import com.example.deliveryservice.database.dao.UserDao
+import com.example.deliveryservice.database.entity.Order
 import com.example.deliveryservice.database.entity.Restaurant
 import com.example.deliveryservice.database.entity.User
 
-@Database(entities = [User::class, Restaurant::class], version = 1)
+@Database(entities = [User::class, Restaurant::class, Order::class], version = 1)
 abstract class MainDatabase : RoomDatabase() {
     abstract fun getUserDao() : UserDao
     abstract fun getRestaurantDao() : RestaurantDao
+    abstract fun getOrderDao() : OrderDao
 
     companion object {
         @Volatile

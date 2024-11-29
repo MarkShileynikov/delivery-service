@@ -1,4 +1,4 @@
-package com.example.deliveryservice
+package com.example.deliveryservice.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,9 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.deliveryservice.R
 import com.example.deliveryservice.database.MainDatabase
+import com.example.deliveryservice.ui.MainActivity
 
 class SignInActivity : AppCompatActivity() {
 
@@ -60,7 +62,8 @@ class SignInActivity : AppCompatActivity() {
 
             if (userDao.getUser(login, password) != null) {
                 Toast.makeText(this, "Вход выполнен успешно" , Toast.LENGTH_SHORT).show()
-                moveToMainScreen()
+                val userId = userDao.getUserId(login)
+                moveToMainScreen(userId)
                 finish()
             }
             else {
@@ -68,12 +71,14 @@ class SignInActivity : AppCompatActivity() {
                 error.text = "Пользователь с такими данными не найден"
             }
         } else {
-            Toast.makeText(this, "Заполните все поля" , Toast.LENGTH_SHORT).show()
+            error.visibility = View.VISIBLE
+            error.text = "Заполните все поля"
         }
     }
 
-    private fun moveToMainScreen() {
+    private fun moveToMainScreen(userId : Int) {
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("USER_ID", userId)
         startActivity(intent)
         finish()
     }

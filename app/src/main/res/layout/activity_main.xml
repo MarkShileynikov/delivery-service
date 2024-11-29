@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ImageView
@@ -36,5 +37,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:overScrollMode="never"/>
+
+    <Button
+        android:id="@+id/orders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_yellow_button"
+        app:backgroundTint="@color/yellow"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:text="Мои заказы"/>
+
+
 
 </LinearLayout>

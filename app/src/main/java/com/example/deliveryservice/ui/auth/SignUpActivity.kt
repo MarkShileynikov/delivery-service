@@ -1,4 +1,4 @@
-package com.example.deliveryservice
+package com.example.deliveryservice.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,10 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.deliveryservice.R
 import com.example.deliveryservice.database.MainDatabase
 import com.example.deliveryservice.database.entity.User
+import com.example.deliveryservice.ui.MainActivity
 
 class SignUpActivity : AppCompatActivity(){
 
@@ -59,35 +61,45 @@ class SignUpActivity : AppCompatActivity(){
         val password = passwordView.text.toString().trim()
         val confirmPassword = confirmPasswordView.text.toString().trim()
 
-        if (password != confirmPassword) {
-            error.visibility = View.VISIBLE
-            error.text = "Пароли не совпадают"
-        } else {
-            error.visibility = View.INVISIBLE
-        }
-
-        if (login.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank()) {
-            val userDao = db.getUserDao()
-            if (!userDao.checkIfUserExists(login)) {
-                userDao.insertUser(
-                    User(
-                        login = login,
-                        password = password
+        when {
+            login.isBlank() || password.isBlank() || confirmPassword.isBlank() -> {
+                error.visibility = View.VISIBLE
+                error.text = "Заполните все поля"
+            }
+            password != confirmPassword -> {
+                error.visibility = View.VISIBLE
+                error.text = "Пароли не совпадают"
+            }
+            password.length < 8 -> {
+                error.visibility = View.VISIBLE
+                error.text = "Пароль должен содержать не менее 8 символов"
+            }
+            else -> {
+                error.visibility = View.INVISIBLE
+                val userDao = db.getUserDao()
+                if (!userDao.checkIfUserExists(login)) {
+                    userDao.insertUser(
+                        User(
+                            login = login,
+                            password = password
+                        )
                     )
-                )
-                Toast.makeText(this, "Вы успешно зарегистрировались" , Toast.LENGTH_SHORT).show()
-                moveToMainScreen()
-            } else {
-                Toast.makeText(this, "Данный пользователь уже зарегистрирован" ,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Вы успешно зарегистрировались" , Toast.LENGTH_SHORT).show()
+
+                    val userId = userDao.getUserId(login)
+
+                    moveToMainScreen(userId)
+                } else {
+                    Toast.makeText(this, "Данный пользователь уже зарегистрирован" ,Toast.LENGTH_SHORT).show()
+                }
             }
 
-        } else {
-            Toast.makeText(this, "Заполните все поля" ,Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun moveToMainScreen() {
+    private fun moveToMainScreen(userId: Int) {
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("USER_ID", userId)
         startActivity(intent)
         finish()
     }
