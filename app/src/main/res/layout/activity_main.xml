@@ -11,15 +11,15 @@
         android:src="@drawable/picture"
         android:layout_marginTop="16dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FOOD DELIVERY"
-        android:layout_gravity="center"
-        android:textColor="@color/red"
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:layout_marginTop="16dp"/>
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="FOOD DELIVERY"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:textColor="@color/red"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textSize="28sp"-->
+<!--        android:layout_marginTop="16dp"/>-->
 
     <TextView
         android:layout_width="wrap_content"
